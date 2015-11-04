@@ -21,7 +21,7 @@ var commonConf = function(additions) {
       ]
     },
     externals: {
-      'react/addons': "React"
+      'react': "React"
     },
     plugins: []
   }, additions)
