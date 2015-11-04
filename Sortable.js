@@ -139,7 +139,7 @@ module.exports = React.createClass({
   },
 
   handleChildUpdate: function(offset, width, height, index){
-    this._dimensionArr[index] = React.addons.update(this._dimensionArr[index], {
+    this._dimensionArr[index] = Update(this._dimensionArr[index], {
       top: { $set: offset.top },
       left: { $set: offset.left },
       width: { $set: width },
@@ -346,7 +346,7 @@ module.exports = React.createClass({
   },
   render: function(){
     return (
-      React.createElement("div", {className: "Sortable", ref: "movable"}, 
+      React.createElement("div", {className: "Sortable", ref: "movable"},
         this.renderItems()
       )
     );
