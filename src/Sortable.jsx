@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var Update = require('react-addons-update');
 var cx = require('classnames');
 
 module.exports = React.createClass({
