@@ -1,8 +1,7 @@
 'use strict';
 
-var React = require('react/addons');
+var React = require('react');
 var cx = require('classnames');
-var CloneWithProps = React.addons.cloneWithProps;
 
 module.exports = React.createClass({
   displayName: 'Sortable',
@@ -103,18 +102,18 @@ module.exports = React.createClass({
     var deltaX = newOffset.left - this._initOffset.left;
     var deltaY = newOffset.top - this._initOffset.top;
     var distance = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
-    if(distance > this.props.minDragDistance) {        
+    if(distance > this.props.minDragDistance) {
         if (newIndex !== -1) {
           this._draggingIndex = newIndex;
           newState['placeHolderIndex'] = newIndex;
         }
 
         this.setState(newState);
-        
+
         this._prevX = e.pageX;
         this._prevY = e.pageY;
     }
-    
+
   },
   handleMouseUp: function(e){
     this.unbindEvent();
@@ -318,7 +317,7 @@ module.exports = React.createClass({
         }
         draggingItem.push(this.renderDraggingItem(item));
       }
-      return CloneWithProps(item, {
+      return React.cloneElement(item, {
         key: index,
         _isPlaceholder: index === this.state.placeHolderIndex,
         sortableIndex: index,
@@ -338,7 +337,7 @@ module.exports = React.createClass({
       width: this._dragDimensions.width,
       height: this._dragDimensions.height
     };
-    return CloneWithProps(item, {
+    return React.cloneElement(item, {
       key: this._dimensionArr.length,
       sortableStyle: style,
       _isDragging: true
