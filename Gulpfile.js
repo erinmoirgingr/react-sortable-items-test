@@ -2,8 +2,8 @@
 
 var gulp = require('gulp');
 var rename = require('gulp-rename');
-var react = require('gulp-react');
-var webpack = require('gulp-webpack');
+var babel = require('gulp-babel');
+var webpack = require('webpack-stream');
 var realWebpack = require('webpack');
 var path = require('path');
 var del = require('del');
@@ -86,12 +86,16 @@ gulp.task('build:browser', function() {
 
 gulp.task('build:node', function() {
   gulp.src('src/Sortable.jsx')
-    .pipe(react())
+    .pipe(babel({
+        presets: ['react']
+    }))
     .pipe(rename('Sortable.js'))
     .pipe(gulp.dest(''));
 
   gulp.src('src/SortableItemMixin.jsx')
-    .pipe(react())
+    .pipe(babel({
+        presets: ['react']
+    }))
     .pipe(rename('SortableItemMixin.js'))
     .pipe(gulp.dest(''));
 });

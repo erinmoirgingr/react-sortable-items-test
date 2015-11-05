@@ -20,14 +20,15 @@
   },
   "homepage": "https://github.com/samvtran/react-sortable-items",
   "devDependencies": {
+    "babel-preset-react": "^6.1.2",
     "classnames": "^1.1.4",
     "css-loader": "^0.9.1",
     "del": "^1.1.1",
     "extend": "^2.0.0",
     "gulp": "^3.8.11",
+    "gulp-babel": "^6.0.0",
     "gulp-react": "^2.0.0",
     "gulp-rename": "^1.2.0",
-    "gulp-webpack": "^1.2.0",
     "immutable": "^3.6.2",
     "jsx-loader": "^0.12.2",
     "react": "^0.14.2",
@@ -35,6 +36,7 @@
     "react-dom": "^0.14.2",
     "reflux": "^0.2.4",
     "style-loader": "^0.8.3",
-    "webpack": "^1.5.3"
+    "webpack": "^1.5.3",
+    "webpack-stream": "^2.1.1"
   }
 }
