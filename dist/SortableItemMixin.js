@@ -100,12 +100,15 @@ var SortableItemMixin =
 	    this.props.onSortableItemMount(this.getPosition(), this.outerWidth(), this.outerHeight(), this.props.sortableIndex);
 	  },
 	  renderWithSortable: function(item){
-	    var classNames = cx({
-	      'SortableItem': true,
-	      'is-dragging': this.props._isDragging,
-	      'is-undraggable': !this.props.isDraggable,
-	      'is-placeholder': this.props._isPlaceholder
-	    });
+	    var classes = item.props.className.split(' ');
+
+	    classes['SortableItem'] = true;
+	    classes['is-dragging']  = this.props._isDragging;
+	    classes['is-undraggable'] = !this.props.isDraggable;
+	    classes['is-placeholder'] = this.props._isPlaceholder;
+
+	    var classNames = cx(classes);
+
 	    return React.cloneElement(
 	      this.props._isPlaceholder && this.getPlaceholderContent && Object.prototype.toString.call(this.getPlaceholderContent) === '[object Function]'
 	        ? this.getPlaceholderContent() : item, {
