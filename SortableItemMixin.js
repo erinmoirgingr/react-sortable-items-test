@@ -53,7 +53,13 @@ module.exports = {
     this.props.onSortableItemMount(this.getPosition(), this.outerWidth(), this.outerHeight(), this.props.sortableIndex);
   },
   renderWithSortable: function (item) {
-    var classes = item.props.className.split(' ');
+    var originalClasses = item.props.className.split(' ');
+
+    var classes = {};
+
+    originalClasses.forEach(function (className) {
+      classes[className] = true;
+    });
 
     classes['SortableItem'] = true;
     classes['is-dragging'] = this.props._isDragging;
@@ -61,8 +67,6 @@ module.exports = {
     classes['is-placeholder'] = this.props._isPlaceholder;
 
     var classNames = cx(classes);
-
-    console.log(classes, classNames);
 
     return React.cloneElement(this.props._isPlaceholder && this.getPlaceholderContent && Object.prototype.toString.call(this.getPlaceholderContent) === '[object Function]' ? this.getPlaceholderContent() : item, {
       className: classNames,
