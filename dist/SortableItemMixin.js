@@ -109,6 +109,8 @@ var SortableItemMixin =
 
 	    var classNames = cx(classes);
 
+	    console.log(classes, classNames);
+
 	    return React.cloneElement(
 	      this.props._isPlaceholder && this.getPlaceholderContent && Object.prototype.toString.call(this.getPlaceholderContent) === '[object Function]'
 	        ? this.getPlaceholderContent() : item, {
