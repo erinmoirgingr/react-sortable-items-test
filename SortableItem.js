@@ -23,10 +23,13 @@ var cx = require('classnames');
 var SortableItem = (function (_React$Component) {
   _inherits(SortableItem, _React$Component);
 
-  function SortableItem() {
+  function SortableItem(props) {
     _classCallCheck(this, SortableItem);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(SortableItem).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SortableItem).call(this, props));
+
+    _this.handleSortableItemMouseDown = _this.handleSortableItemMouseDown.bind(_this);
+    return _this;
   }
 
   _createClass(SortableItem, [{

@@ -8,6 +8,12 @@ var cx = require('classnames');
  * Elements with 'is-isolated' in the class list will not trigger on mouse down events.
  */
 export default class SortableItem extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleSortableItemMouseDown = this.handleSortableItemMouseDown.bind(this);
+  }
+
   handleSortableItemMouseDown(e) {
     var evt = {
       pageX: e.pageX,
