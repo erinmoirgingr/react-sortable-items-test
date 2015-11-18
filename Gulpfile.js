@@ -17,7 +17,7 @@ var commonConf = function(additions) {
     },
     module: {
       loaders: [
-        { test: /\.jsx$/, loader: 'jsx-loader?insertPragma=React.DOM' }
+        { test: /\.jsx$/, loader: 'babel?presets[]=react,presets[]=es2015' }
       ]
     },
     externals: {
@@ -82,6 +82,35 @@ gulp.task('build:browser', function() {
       ]
     })))
     .pipe(gulp.dest('dist'));
+
+    gulp.src('src/SortableItem.jsx')
+        .pipe(webpack(commonConf({
+          output: {
+            filename: 'SortableItem.js',
+            library: "SortableItem",
+            libraryTarget: "var"
+          }
+        })))
+        .pipe(gulp.dest('dist'));
+
+    gulp.src('src/SortableItem.jsx')
+      .pipe(webpack(commonConf({
+        output: {
+          filename: 'SortableItem.min.js',
+          library: "SortableItem",
+          libraryTarget: "var"
+        },
+        plugins: [
+          new realWebpack.DefinePlugin({
+                "process.env": {
+                  "NODE_ENV": JSON.stringify('production')
+                }
+              }),
+          new realWebpack.optimize.DedupePlugin(),
+          new realWebpack.optimize.UglifyJsPlugin()
+        ]
+      })))
+      .pipe(gulp.dest('dist'));
 });
 
 gulp.task('build:node', function() {
@@ -97,6 +126,13 @@ gulp.task('build:node', function() {
         presets: ['react']
     }))
     .pipe(rename('SortableItemMixin.js'))
+    .pipe(gulp.dest(''));
+
+  gulp.src('src/SortableItem.jsx')
+    .pipe(babel({
+      presets: ['es2015', 'react']
+    }))
+    .pipe(rename('SortableItem.js'))
     .pipe(gulp.dest(''));
 });
 
