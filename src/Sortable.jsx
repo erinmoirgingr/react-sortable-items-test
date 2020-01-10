@@ -1,11 +1,12 @@
 'use strict';
 
 var React = require('react');
+var createReactClass = require('create-react-class');
 var ReactDOM = require('react-dom');
 //var Update = require('react-addons-update');
 import update from 'immutability-helper';
 
-module.exports = React.createClass({
+module.exports = createReactClass({
   getDefaultProps: function() {
     return {
       onSort: function() {},
