@@ -11,11 +11,7 @@ var ItemRecord = require('./ItemRecord');
 
 var Item = React.createClass({
   mixins: [sortableMixin],
-  propTypes: {
-    record: React.PropTypes.instanceOf(ItemRecord).isRequired,
-    handleRemoval: React.PropTypes.func.isRequired,
-    index: React.PropTypes.number.isRequired
-  },
+
   handleRemove: function(e) {
     e.preventDefault();
     this.props.handleRemoval(this.props.index);

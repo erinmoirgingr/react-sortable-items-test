@@ -6,29 +6,6 @@ var Update = require('react-addons-update');
 var cx = require('classnames');
 
 module.exports = React.createClass({
-  displayName: 'Sortable',
-  propTypes: {
-    onSort: React.PropTypes.func,
-    horizontal: React.PropTypes.bool,
-    sensitivity: (function (props, propName, componentName) {
-      if (isNaN(parseFloat(props[propName])) && !isFinite(props[propName]) || props[propName] < 0 || props[propName] > 1) {
-        return new Error('sensitivity must be a number from 0 to 1.');
-      }
-    }).bind(this),
-    /**
-      If a sortable item has isDraggable set to false, prevent sorting below the item.
-      This is most useful if items are pinned at the bottom until validated.
-      Note that anything below an undraggable element can be moved above it.
-      This option takes precedence over floatUndraggables if both are set to true.
-    */
-    sinkUndraggables: React.PropTypes.bool,
-    /**
-      See sinkUndraggables. This won't allow sorting above undraggable items.
-      This defers to sinkUndraggables if both are set to true.
-    */
-    floatUndraggables: React.PropTypes.bool,
-    minDragDistance: React.PropTypes.number
-  },
   getDefaultProps: function () {
     return {
       onSort: function () {},
