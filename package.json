@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/samvtran/react-sortable-items",
   "dependencies": {
+    "create-react-class": "^15.6.3",
     "immutability-helper": "^1.0.0"
   },
   "peerDependencies": {
