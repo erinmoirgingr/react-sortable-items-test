@@ -3,7 +3,7 @@
 var React = require('react');
 var createReactClass = require('create-react-class');
 var ReactDOM = require('react-dom');
-var Update = require('react-addons-update');
+var Update = require('immutability-helper');
 var cx = require('classnames');
 
 module.exports = createReactClass({
