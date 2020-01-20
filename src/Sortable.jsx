@@ -6,7 +6,7 @@ var ReactDOM = require('react-dom');
 //var Update = require('react-addons-update');
 import update from 'immutability-helper';
 
-module.exports = createReactClass({
+export default createReactClass({
   getDefaultProps: function() {
     return {
       onSort: function() {},

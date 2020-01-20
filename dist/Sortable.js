@@ -47,6 +47,10 @@ var Sortable =
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _immutabilityHelper = __webpack_require__(1);
 
 	var _immutabilityHelper2 = _interopRequireDefault(_immutabilityHelper);
@@ -57,10 +61,8 @@ var Sortable =
 	var createReactClass = __webpack_require__(5);
 	var ReactDOM = __webpack_require__(12);
 	//var Update = require('react-addons-update');
-
-
-	module.exports = createReactClass({
-	  displayName: 'exports',
+	exports.default = createReactClass({
+	  displayName: 'Sortable',
 
 	  getDefaultProps: function getDefaultProps() {
 	    return {

@@ -47,6 +47,9 @@ var SortableItemMixin =
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(2);
 	var cx = __webpack_require__(15);
@@ -54,7 +57,7 @@ var SortableItemMixin =
 	/**
 	 * Elements with 'is-isolated' in the class list will not trigger on mouse down events.
 	 */
-	module.exports = {
+	exports.default = {
 	  getDefaultProps: function getDefaultProps() {
 	    return {
 	      sortableStyle: {},

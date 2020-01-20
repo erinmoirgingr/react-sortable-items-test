@@ -7,7 +7,7 @@ var cx = require('classnames');
 /**
  * Elements with 'is-isolated' in the class list will not trigger on mouse down events.
  */
-module.exports = {
+export default {
   getDefaultProps: function() {
     return {
       sortableStyle: {},
