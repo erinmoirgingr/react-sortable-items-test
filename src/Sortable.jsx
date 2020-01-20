@@ -17,6 +17,9 @@ module.exports = createReactClass({
     }
   },
   getInitialState: function() {
+    this.refElems = {
+      movable: React.createRef(),
+    }
     this.rerender(this.props.children);
 
     return {
@@ -325,7 +328,7 @@ module.exports = createReactClass({
   },
   render: function(){
     return (
-      <div className="Sortable" ref="movable">
+      <div className="Sortable" ref={this.refElems.movable}>
         {this.renderItems()}
       </div>
     );
