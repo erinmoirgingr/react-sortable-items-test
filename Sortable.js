@@ -3,10 +3,12 @@
 var React = require('react');
 var createReactClass = require('create-react-class');
 var ReactDOM = require('react-dom');
-var Update = require('immutability-helper');
-var cx = require('classnames');
+//var Update = require('react-addons-update');
+import update from 'immutability-helper';
 
 module.exports = createReactClass({
+  displayName: 'exports',
+
   getDefaultProps: function () {
     return {
       onSort: function () {},
@@ -17,6 +19,9 @@ module.exports = createReactClass({
     };
   },
   getInitialState: function () {
+    this.refElems = {
+      movable: React.createRef()
+    };
     this.rerender(this.props.children);
 
     return {
@@ -36,7 +41,7 @@ module.exports = createReactClass({
     this._lastDraggable = React.Children.count(children) - 1;
     var lastDraggableSet = false;
     this._orderArr = [];
-    this._dimensionArr = children.map((function (item, idx) {
+    this._dimensionArr = children.map(function (item, idx) {
       if (this.props.sinkUndraggables && !item.props.isDraggable && idx <= this._lastDraggable && !lastDraggableSet) {
         this._lastDraggable = idx - 1;
         lastDraggableSet = true;
@@ -45,7 +50,7 @@ module.exports = createReactClass({
       }
       this._orderArr.push(idx);
       return {};
-    }).bind(this));
+    }.bind(this));
   },
   componentDidMount: function () {
     this._dragDimensions = null;
@@ -117,7 +122,7 @@ module.exports = createReactClass({
   },
 
   handleChildUpdate: function (offset, width, height, index) {
-    this._dimensionArr[index] = Update(this._dimensionArr[index], {
+    this._dimensionArr[index] = update(this._dimensionArr[index], {
       top: { $set: offset.top },
       left: { $set: offset.left },
       width: { $set: width },
@@ -147,7 +152,7 @@ module.exports = createReactClass({
     var newIndex;
     var lastDimens = this._dimensionArr[this._dimensionArr.length - 1];
     var buffer = 1 - this.props.sensitivity;
-    this._dimensionArr.every((function (coord, index) {
+    this._dimensionArr.every(function (coord, index) {
       var relativeLeft = offsetX - coord.left;
       var relativeTop = offsetY - coord.top;
       if (offsetY < 0) {
@@ -165,7 +170,7 @@ module.exports = createReactClass({
         return false;
       }
       return true;
-    }).bind(this));
+    }.bind(this));
 
     return newIndex;
   },
@@ -173,7 +178,7 @@ module.exports = createReactClass({
     var newIndex;
     var lastDimens = this._dimensionArr[this._dimensionArr.length - 1];
     var buffer = 1 - this.props.sensitivity;
-    this._dimensionArr.every((function (coord, index) {
+    this._dimensionArr.every(function (coord, index) {
       var relativeLeft = offsetX - coord.left;
       var relativeTop = offsetY - coord.top;
       if (offsetX < 0) {
@@ -191,7 +196,7 @@ module.exports = createReactClass({
         return false;
       }
       return true;
-    }).bind(this));
+    }.bind(this));
     return newIndex;
   },
   isNumeric: function (val) {
@@ -273,15 +278,15 @@ module.exports = createReactClass({
     return newIndex;
   },
   getSortData: function () {
-    return this._orderArr.map((function (itemIndex) {
+    return this._orderArr.map(function (itemIndex) {
       return this.props.children[itemIndex].props.sortData;
-    }).bind(this));
+    }.bind(this));
   },
   renderItems: function () {
     var draggingItem = [];
     var childrenCount = React.Children.count(this.props.children);
 
-    var items = this._orderArr.map((function (itemIndex, index) {
+    var items = this._orderArr.map(function (itemIndex, index) {
       var item = this.props.children[itemIndex];
       if (index === this._draggingIndex && item.props.isDraggable) {
         if (this._dragDimensions === null) {
@@ -296,12 +301,12 @@ module.exports = createReactClass({
         key: index,
         _isPlaceholder: index === this.state.placeHolderIndex,
         sortableIndex: index,
-        onSortableItemMouseDown: (function (e) {
+        onSortableItemMouseDown: function (e) {
           this.handleMouseDown(e, index);
-        }).bind(this),
+        }.bind(this),
         onSortableItemMount: this.handleChildUpdate
       });
-    }).bind(this));
+    }.bind(this));
 
     return items.concat(draggingItem);
   },
@@ -321,7 +326,7 @@ module.exports = createReactClass({
   render: function () {
     return React.createElement(
       'div',
-      { className: 'Sortable', ref: 'movable' },
+      { className: 'Sortable', ref: this.refElems.movable },
       this.renderItems()
     );
   }
